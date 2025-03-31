@@ -7,10 +7,9 @@ import { errorResponse } from '../../infrastructure/utils/responseFormatter';
 
 export const errorHandler = (
   err: Error,
-  req: Request,
+  _req: Request,
   res: Response,
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  next: NextFunction
+  _next: NextFunction
 ): void => {
   let statusCode = 500;
   let message = 'Internal Server Error';
