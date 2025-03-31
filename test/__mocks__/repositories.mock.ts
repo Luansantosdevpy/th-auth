@@ -23,6 +23,19 @@ export interface MockUserAttributes {
   photo?: string;
 }
 
+export interface MockHealthCheck {
+  name: string,
+  status: string,
+  uptime: number,
+  timestamp: number,
+  checks: [
+    {
+      name: string,
+      status: string,
+    },
+  ],
+}
+
 export const createMockRepositories = () => {
   const userRepository = {
     findByEmail: jest.fn(),
@@ -44,9 +57,14 @@ export const createMockRepositories = () => {
     findRoleByName: jest.fn()
   };
 
+  const healthCheckRepository = {
+    findStatus: jest.fn()
+  }
+
   return {
     userRepository,
     userRoleRepository,
     roleRepository,
+    healthCheckRepository
   };
 };

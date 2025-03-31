@@ -1,4 +1,4 @@
-import type { MockUser, MockUserRole, MockRole, MockUserAttributes } from './repositories.mock';
+import type { MockUser, MockUserRole, MockRole, MockUserAttributes, MockHealthCheck } from './repositories.mock';
 
 export const createMockUser = (overrides = {}): MockUser => ({
   _id: '123',
@@ -28,3 +28,19 @@ export const createMockUserAttributes = (overrides = {}): MockUserAttributes => 
   photo: 'photo-url.jpg',
   ...overrides
 });
+
+export const createMockHealthCheck = (overrides = {}): MockHealthCheck => ({
+  name: 'Project base',
+  status: 'OK',
+  uptime: process.uptime(),
+  timestamp: Date.now(),
+  checks: [
+    {
+      name: 'Database',
+      status: 'OK',
+    },
+  ],
+  ...overrides
+});
+
+export const mockHealthCheck = (): string => 'OK';
