@@ -11,8 +11,8 @@
     "lint:fix": "npm run lint --fix",
     "lint": "eslint ./src --ext .ts",
     "prepare": "husky install",
-    "test": "jest",
-    "test:coverage": "jest --coverage --coverageReporters=text"
+    "jest": "jest",
+    "test": "jest --coverage --coverageReporters=text"
   },
   "author": "Luan Santos",
   "license": "ISC",
