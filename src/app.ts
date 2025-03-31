@@ -1,11 +1,12 @@
 import 'reflect-metadata';
 import cors from 'cors';
-import type { Request, Response } from 'express';
 import express from 'express';
 import type { Server } from 'http';
 import { container } from 'tsyringe';
+import xss from 'xss-clean';
 
 import routes from './api/routes/routes';
+import { errorHandler } from './application/middlewares/errorHandler';
 import dependencyContainer from './dependencyContainer';
 import { initializeDatabase } from './infrastructure/data/config/database';
 import Logger from './infrastructure/log/logger';
@@ -22,16 +23,18 @@ export default class App {
       this.setupMiddlewares();
       await this.setupRoutes();
       this.setupErrorHandling();
+      this.setupSecurityMiddlewares();
     } catch (error) {
       Logger.error('Error during app initialization:', error);
       process.exit(1);
     }
   }
 
-  public start(port: number, appName: string): void {
+  public start(port: number, appName: string): Server {
     this.server = this.express.listen(port, '0.0.0.0', () => {
       Logger.info(`${appName} listening on port ${port}!`);
     });
+    return this.server;
   }
 
   public stop(): void {
@@ -64,6 +67,10 @@ export default class App {
       })
     );
   }
+  
+  private setupSecurityMiddlewares(): void {
+    this.express.use(xss());
+  }
 
   private async setupRoutes(): Promise<void> {
     const router = await routes();
@@ -71,9 +78,6 @@ export default class App {
   }
 
   private setupErrorHandling(): void {
-    this.express.use((err: Error, req: Request, res: Response) => {
-      Logger.error('Unhandled error:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-    });
+    this.express.use(errorHandler);
   }
 }
