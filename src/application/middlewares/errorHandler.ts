@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 
 import { ApiError } from '../../infrastructure/error/apiError';
 import Logger from '../../infrastructure/log/logger';
-
+import { errorResponse } from '../../infrastructure/utils/responseFormatter';
 
 export const errorHandler = (
   err: Error,
@@ -24,9 +24,7 @@ export const errorHandler = (
     Logger.error('Unhandled Error:', err);
   }
 
-  res.status(statusCode).json({
-    status: statusCode,
-    message,
-    details,
-  });
+  res.status(statusCode).json(
+    errorResponse(statusCode, message, details)
+  );
 };
