@@ -4,13 +4,13 @@
     "emitDecoratorMetadata": true,
     "target": "es2018",
     "module": "commonjs",
-    "rootDir": "./src",
-    "types": ["node", "reflect-metadata"],
+    "types": ["node", "reflect-metadata", "jest"],
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src", "test"]
 }
