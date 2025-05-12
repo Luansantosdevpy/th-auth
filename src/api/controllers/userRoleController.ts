@@ -35,4 +35,18 @@ export default class UserRoleController extends BaseController {
       return res.status(200).json(successResponse(200, 'Role retrieved successfully', roleList));
     }, req, res, next);
   };
+
+  public deleteRoleToUser = async(req: Request, res: Response, next: NextFunction): Promise<void> =>{
+    this.execute(async () => {
+      Logger.debug('UserRoleController - deleteRoleToUser - Request Received');
+      const { userId, roleId } = req.body as UserRole;
+
+      const userRoleService = this.resolve(UserRoleService);
+      const deletedRole = await userRoleService.deleteRoleToUser({userId, roleId});
+
+      Logger.debug('UserRoleController - deleteRoleToUser - User role deleted successfully');
+      return res.status(200).json(successResponse(200, 'User role deleted successfully',deletedRole));
+
+    }, req, res, next);
+  };
 }

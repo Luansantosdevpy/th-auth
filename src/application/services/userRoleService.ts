@@ -22,4 +22,11 @@ export default class UserRoleService {
   public async findRolesByUser(user: string): Promise<UserRole[] | null> {
     return await this.userRoleRepository.findRolesByUser(user);
   }
+
+  public async deleteRoleToUser(data: UserRoleRequest): Promise<void> {
+    const { userId, roleId } = data;
+    const deletedRole = await this.userRoleRepository.deleteRoleToUser({userId, roleId})
+
+     console.log(deletedRole);
+  }
 }
