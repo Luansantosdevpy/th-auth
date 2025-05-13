@@ -12,4 +12,4 @@ const UserRoleSchema = new Schema<UserRole>({
   assignedAt: { type: Date, default: Date.now },
 });
 
-export default model<UserRole>('User_Role', UserRoleSchema);
+export default model<UserRole>('user_role', UserRoleSchema);

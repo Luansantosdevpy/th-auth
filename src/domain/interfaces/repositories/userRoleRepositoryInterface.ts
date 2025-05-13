@@ -4,5 +4,5 @@ import type { UserRoleRequest } from "../input/userRoleRequest";
 export default interface UserRoleRepositoryInterface {
   findRolesByUser(userId: string): Promise<UserRole[]>;
   assignRoleToUser(userRole: UserRoleRequest): Promise<UserRole>;
-  deleteRoleToUser(userRole: UserRoleRequest): Promise<void>;
+  deleteRoleToUser(userId: string): Promise<void>;
 }

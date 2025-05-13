@@ -18,9 +18,7 @@ export default class UserRoleRepository implements UserRoleRepositoryInterface {
     return UserRoleSchema.find({ userId }).lean();
   }
 
-  public async deleteRoleToUser(userRole: UserRoleRequest): Promise<void> {
-   const userRoles = UserRoleSchema.find({userId:userRole.userId});
-   console.log(userRoles)
-    UserRoleSchema.deleteOne({ userId:userRole.userId });
+  public async deleteRoleToUser(userId: string): Promise<void> {
+    await UserRoleSchema.deleteOne({ userId });
   }
 }

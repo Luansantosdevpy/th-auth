@@ -24,9 +24,7 @@ export default class UserRoleService {
   }
 
   public async deleteRoleToUser(data: UserRoleRequest): Promise<void> {
-    const { userId, roleId } = data;
-    const deletedRole = await this.userRoleRepository.deleteRoleToUser({userId, roleId})
-
-     console.log(deletedRole);
+    const { userId } = data;
+    await this.userRoleRepository.deleteRoleToUser(userId)
   }
 }
