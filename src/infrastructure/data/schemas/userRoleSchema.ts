@@ -1,16 +1,15 @@
-import type { Types } from 'mongoose';
 import { Schema, model } from 'mongoose';
 
 export interface UserRole {
-  userId: Types.ObjectId;
-  roleId: Types.ObjectId;
+  userId: string;
+  roleId: string;
   assignedAt: Date;
 }
 
 const UserRoleSchema = new Schema<UserRole>({
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  roleId: { type: Schema.Types.ObjectId, ref: 'Role', required: true },
+  userId: { type: String, required: true },
+  roleId: { type: String, required: true },
   assignedAt: { type: Date, default: Date.now },
 });
 
-export default model<UserRole>('User_Role', UserRoleSchema);
+export default model<UserRole>('user_role', UserRoleSchema);

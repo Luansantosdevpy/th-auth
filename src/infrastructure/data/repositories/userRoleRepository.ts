@@ -8,6 +8,7 @@ import UserRoleSchema from '../schemas/userRoleSchema';
 
 @injectable()
 export default class UserRoleRepository implements UserRoleRepositoryInterface {
+  
   public async assignRoleToUser(userRole: UserRoleRequest): Promise<UserRole> {
     const newUserRole = new UserRoleSchema(userRole);
     return newUserRole.save();
@@ -15,5 +16,9 @@ export default class UserRoleRepository implements UserRoleRepositoryInterface {
 
   public async findRolesByUser(userId: string): Promise<UserRole[]> {
     return UserRoleSchema.find({ userId }).lean();
+  }
+
+  public async deleteRoleToUser(userId: string): Promise<void> {
+    await UserRoleSchema.deleteOne({ userId });
   }
 }

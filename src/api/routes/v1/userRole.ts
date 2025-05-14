@@ -10,6 +10,7 @@ export default async (): Promise<Router> => {
 
   router.post('/assign/role/user', authenticate, userRoleController.assignRoleToUser);
   router.get('/:userId', authenticate, userRoleController.findRolesByUser);
+  router.delete('/delete/role/user',authenticate, userRoleController.deleteRoleToUser);
 
   return router;
 };
