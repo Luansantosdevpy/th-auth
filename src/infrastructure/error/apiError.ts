@@ -14,7 +14,7 @@ export class ApiError extends Error {
     return new ApiError(400, message, details);
   }
 
-  static unprocessabelEntity(message: string, details?: any): ApiError {
+  static unprocessableEntity(message: string, details?: any): ApiError {
     return new ApiError(422, message, details);
   }
 
