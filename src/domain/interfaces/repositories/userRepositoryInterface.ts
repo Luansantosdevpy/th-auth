@@ -7,5 +7,4 @@ export default interface UserRepositoryInterface {
   findUserById(userId: string): Promise<User | null>;
   assignAttributesToUser(userAttributes: UserAttributes): Promise<UserAttributes>;
   findUserAttributes(userId: string): Promise<UserAttributes | null>;
-  findUserPermissions(userId: string): Promise<string[]>;
 }

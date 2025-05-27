@@ -3,7 +3,6 @@ import { injectable } from 'tsyringe';
 
 import UserService from '../../application/services/userService';
 import type { UserAttributes } from '../../domain/models/userAttributes';
-import { ApiError } from '../../infrastructure/error/apiError';
 import Logger from '../../infrastructure/log/logger';
 import { successResponse } from '../../infrastructure/utils/responseFormatter';
 import { BaseController } from '../controllers/baseController';
@@ -29,19 +28,10 @@ export default class UserController extends BaseController {
       Logger.debug('UserController - verifyPermission - Request Received');
 
       const token = req.headers.authorization?.split(' ')[1];
-      const { requiredPermission } = req.body;
-
-      if (!token) {
-        Logger.error('UserController - verifyPermission - Token not provided');
-        throw ApiError.badRequest('Token not provided');
-      }
-      if (!requiredPermission) {
-        Logger.error('UserController - verifyPermission - Required permission not provided');
-        throw ApiError.badRequest('Required permission not provided');
-      }
+      const { permission } = req.params;
 
       const userService = this.resolve(UserService);
-      const hasPermission = await userService.verifyUserPermission(token, requiredPermission);
+      const hasPermission = await userService.verifyUserPermission(token, permission);
 
       if (!hasPermission) {
         Logger.debug('UserController - verifyPermission - Access denied');

@@ -39,7 +39,10 @@ export default class PermissionRoleService {
   public async findPermissionsByRole(role: string): Promise<PermissionRole[] | null> {
     return await this.permissionRoleRepository.findPermissionsByRole(role);
   }
-
+  public async findPermissionsByRoleId(roleId: string): Promise<PermissionRole | null> {
+    return await this.permissionRoleRepository.findPermissionsByRoleId(roleId);
+  }
+  
   public async checkPermission(userRoles: string[], requiredPermission: string): Promise<boolean> {
     for (const roleId of userRoles) {
       const permissions = await this.findPermissionsByRole(roleId);

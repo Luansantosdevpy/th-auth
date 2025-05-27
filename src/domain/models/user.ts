@@ -5,5 +5,4 @@ export interface User {
     name: string;
     createdAt: Date;
     organizationId: string;
-    permissions?: string[]; 
 }

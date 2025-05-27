@@ -22,4 +22,7 @@ export default class UserRoleService {
   public async findRolesByUser(user: string): Promise<UserRole[] | null> {
     return await this.userRoleRepository.findRolesByUser(user);
   }
+  public async findRolesByUserId(userId: string): Promise<UserRole | null> {
+    return await this.userRoleRepository.findRolesByUserId(userId);
+  }
 }

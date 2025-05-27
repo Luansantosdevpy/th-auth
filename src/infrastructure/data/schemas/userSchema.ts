@@ -7,7 +7,6 @@ export interface UserDocument extends Document {
   name: string;
   createdAt: Date;
   organizationId: string;
-  permissions?: string[];
 }
 
 const UserSchema = new Schema<UserDocument>({
@@ -15,7 +14,6 @@ const UserSchema = new Schema<UserDocument>({
   password: { type: String, required: true },
   name: { type: String, required: true },
   createdAt: { type: Date, required: true },
-  permissions: [{ type: String }],
   organizationId: { type: String }
 });
 

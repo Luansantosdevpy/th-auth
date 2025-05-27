@@ -17,4 +17,7 @@ export default class PermissionRoleRepository implements PermissionRoleRepositor
   public async updateAssignedAt(roleId: string): Promise<void> {
     await PermissionRoleSchema.updateMany({ roleId }, { assignedAt: new Date() });
   }
+  public async findPermissionsByRoleId(roleId: string): Promise<PermissionRole | null> {
+    return await PermissionRoleSchema.findOne({ roleId }).lean();
+  }
 }

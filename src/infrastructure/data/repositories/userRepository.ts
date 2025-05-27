@@ -3,7 +3,6 @@ import { injectable } from 'tsyringe';
 import type UserRepositoryInterface from '../../../domain/interfaces/repositories/userRepositoryInterface';
 import type { User } from '../../../domain/models/user';
 import type { UserAttributes } from '../../../domain/models/userAttributes';
-import Logger from '../../log/logger';
 import UserAttributesModel from '../schemas/userAttributesSchema';
 import UserModel from '../schemas/userSchema';
 
@@ -46,20 +45,4 @@ export default class UserRepository implements UserRepositoryInterface {
     return user as UserAttributes | null;
   }
 
-  public async findUserPermissions(userId: string): Promise<string[]> {
-    try {
-      const user = await UserModel.findById(userId).populate('permissions').lean();
-
-      if (!user) {
-        Logger.warn(`UserRepository - findUserPermissions - User not found: ${userId}`);
-        return [];
-      }
-
-      Logger.debug(`UserRepository - findUserPermissions - Permissions found for user ${userId}:`, user.permissions);
-      return user.permissions || [];
-    } catch (error) {
-      Logger.error(`UserRepository - findUserPermissions - Error fetching permissions for user ${userId}:`, error);
-      throw error;
-    }
-  }
 }
