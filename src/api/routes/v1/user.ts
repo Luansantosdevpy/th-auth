@@ -10,6 +10,7 @@ export default async (): Promise<Router> => {
   const userController = container.resolve(UserController);
 
   router.post('/assign/attributes', validations.userAttributesValidation, validationMiddleware, userController.assignAttributesToUser);
+  router.get('/verify/permission/:permission',  userController.verifyPermission);
 
   return router;
 };

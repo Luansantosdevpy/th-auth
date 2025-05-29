@@ -44,4 +44,5 @@ export default class UserRepository implements UserRepositoryInterface {
     const user = await UserAttributesModel.findOne({ userId }).lean();
     return user as UserAttributes | null;
   }
+
 }

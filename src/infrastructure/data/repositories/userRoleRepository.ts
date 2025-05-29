@@ -16,4 +16,8 @@ export default class UserRoleRepository implements UserRoleRepositoryInterface {
   public async findRolesByUser(userId: string): Promise<UserRole[]> {
     return UserRoleSchema.find({ userId }).lean();
   }
+
+  public async findRolesByUserId(userId: string): Promise<UserRole | null> {
+    return UserRoleSchema.findOne({ userId }).lean();
+  }
 }

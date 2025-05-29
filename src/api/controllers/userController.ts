@@ -22,4 +22,24 @@ export default class UserController extends BaseController {
       return res.status(200).json(successResponse(200, 'Attributes added to user', faceGroup));
     }, req, res, next);
   };
+
+  public verifyPermission = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    this.execute(async () => {
+      Logger.debug('UserController - verifyPermission - Request Received');
+
+      const token = req.headers.authorization?.split(' ')[1];
+      const { permission } = req.params;
+
+      const userService = this.resolve(UserService);
+      const hasPermission = await userService.verifyUserPermission(token, permission);
+
+      if (!hasPermission) {
+        Logger.debug('UserController - verifyPermission - Access denied');
+        return res.status(403).json(successResponse(403, 'Access denied'));
+      }
+
+      Logger.debug('UserController - verifyPermission - Access granted');
+      return res.status(200).json(successResponse(200, 'Access granted'));
+    }, req, res, next);
+  };
 }

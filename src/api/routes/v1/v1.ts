@@ -5,6 +5,7 @@ import healthcheck from './healthcheck';
 import permission from './permission';
 import role from './role';
 import userRole from './userRole';
+import user from './user';
 
 export default async (): Promise<Router> => {
   const router = Router();
@@ -15,5 +16,6 @@ export default async (): Promise<Router> => {
   router.use('/permission', await permission());
   router.use('/role', await role());
   router.use('/user-role', await userRole());
+  router.use('/user', await user());
   return router;
 };
